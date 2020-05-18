@@ -1,29 +1,34 @@
-*************************************
-* REPLACING ALL IMAGES IN PDF FILES *
-* 		with iText Library 			*
-*************************************
+********************************************************
+* REPLACING ALL IMAGES IN PDF FILES with iText Library *
+********************************************************
 
 English Version
 
-Here is the code to replace images in PDF, 
-in Java. 
-It will replace all the images in pdf file with 
-a red image.
+Here is the code to replace images in PDF, in Java. 
+It will replace all the images in pdf file with a red image.
 
-NOTE: The iText for Java library was used 
-		for reading, writing and editing 
-		a PDF file.
+The SOURCE CODE is here 
+	
+  -> "sostituisciImmaginiPDF/src/sostituisciimmaginipdf/SostituisciImmaginiPDF.java" 
+
+NOTE: The iText for Java library was used for reading, 
+	writing and editing a PDF file.
+	
 ___________________________________________________________
 
 Italian Version
 
-*****************************************
-* SOSTITUZIONE DI TUTTE LE IMMAGINI 	*
-* IN UN FILE PDF con la libreria iText 	*
-*****************************************
+***************************************************************************
+* SOSTITUZIONE DI TUTTE LE IMMAGINI IN UN FILE PDF con la libreria iText  *
+***************************************************************************
 
 Ecco il codice per sostituire le immagini nei PDF, in Java.
-Sostituirà tutte le immagini nel pdf con un'immagine rossa.
+Sostituirà tutte le immagini in un file PDF con un'immagine rossa.
+
+Il CODICE SORGENTE è qui
+	
+  -> "sostituisciImmaginiPDF/src/sostituisciimmaginipdf/SostituisciImmaginiPDF.java" 
+
 
 NOTE: E' stata usata la libreria iText per Java per la 
-		lettura, scrittura e modifica di un file PDF. 
+	lettura, scrittura e modifica di un file PDF. 
