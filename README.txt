@@ -6,11 +6,10 @@ English Version
 
 Here is the code to replace images in PDF, in Java. 
 It will replace all the images in pdf file with a red image.
-The SOURCE CODE is in 
+
+The SOURCE CODE is here 
 	
   -> "sostituisciImmaginiPDF/src/sostituisciimmaginipdf/SostituisciImmaginiPDF.java" 
-
-folder.
 
 NOTE: The iText for Java library was used for reading, 
 	writing and editing a PDF file.
@@ -26,7 +25,7 @@ Italian Version
 Ecco il codice per sostituire le immagini nei PDF, in Java.
 Sostituirà tutte le immagini in un file PDF con un'immagine rossa.
 
-Il CODICE SORGENTE è nella cartella
+Il CODICE SORGENTE è qui
 	
   -> "sostituisciImmaginiPDF/src/sostituisciimmaginipdf/SostituisciImmaginiPDF.java" 
 
