@@ -9,7 +9,7 @@ It will replace all the images in pdf file with a red image.
 
 The SOURCE CODE is here 
 	
-  -> "sostituisciImmaginiPDF/src/sostituisciimmaginipdf/SostituisciImmaginiPDF.java" 
+  -> "replacingPDFImage/src/replacingpdfimages/ReplacingPDFImage.java" 
 
 NOTE: The iText for Java library was used for reading, 
 	writing and editing a PDF file.
@@ -27,7 +27,7 @@ Sostituirà tutte le immagini in un file PDF con un'immagine rossa.
 
 Il CODICE SORGENTE è qui
 	
-  -> "sostituisciImmaginiPDF/src/sostituisciimmaginipdf/SostituisciImmaginiPDF.java" 
+  -> "replacingPDFImage/src/replacingpdfimages/ReplacingPDFImage.java" 
 
 
 NOTE: E' stata usata la libreria iText per Java per la 
