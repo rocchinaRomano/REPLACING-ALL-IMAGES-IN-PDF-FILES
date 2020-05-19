@@ -31,21 +31,19 @@ import java.util.Set;
  */
 public class SostituisciImmaginiPDF {
 
-    //percorso immagine sostitutiva:
+    //red image's path:
     private static final String red = "./src/sostituisciimmaginipdf/red.jpg";
     
-    //percorso PDF di input:
+    //Input PDF's path:
     private static final String input = "./src/sostituisciimmaginipdf/input.pdf";
    
-    
-    
-    //percorso PDF di output:
+    //Output PDF's path
     private static final String output = "./src/sostituisciimmaginipdf/output.pdf";
     
-    //path dei file temp
+    //Temporary files's path
     private static final String pathTemp = "./src/sostituisciimmaginipdf/temp/";
     
-    //pdf di appoggio
+    //Support pdf file
     private static String appoggio = input;
     
     private static int numPdf = 1;
@@ -54,30 +52,31 @@ public class SostituisciImmaginiPDF {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //sostituisce tutte le immagini del PDF con un'immagine rossa
+        //Replacing all images in PDF files with a red image
         try {
             int numImmagini = contaImmaginiPDF();
             System.out.println("Il PDF ha " + numImmagini + " immagini!");
-            //Se il pdf ha immagini, procediamo con l'estrazione delle immagini
-            //e la sostituzione 
+            
             if(numImmagini == 0){
+                //The PDF file hasn't images
                 System.out.println("Il PDF non contiene immagini!");
             }else{
-                //procediamo con la sostituzione delle immagini
+                //The PDF file contains images, then we replace the PDF's images
+                //with a red image
                 sostituisciImmagini();
             }
         } catch (IOException | DocumentException ex) {
             System.err.println(ex.getMessage());
         }
-        //Alla fine svuotare la cartella dei file temporanei
+        //At the end, we empty the temporary files folder.
         svuotaCartella(pathTemp);
     }
 
     private static int contaImmaginiPDF() throws IOException {
-        //Verifica se il PDF contiene o meno immagini
+        //Check if the PDF contains images
         PdfReader reader = new PdfReader(input);
-        System.out.println("Il PDF ha " + reader.getNumberOfPages() 
-                + " pagine.");
+        System.out.println("The PDF has " + reader.getNumberOfPages() 
+                + " pages.");
         int conta = 0;
         for (int i = 1; i <= reader.getXrefSize(); i++) {
             PdfObject obj = reader.getPdfObject(i);
@@ -85,7 +84,7 @@ public class SostituisciImmaginiPDF {
                 PRStream stream = (PRStream)obj;
                 PdfObject type = stream.get(PdfName.SUBTYPE);
                 if(type != null && type.toString().equals(PdfName.IMAGE.toString())){
-                    //E' un'immagine, incrementiamo il contatore
+                    //It is an image, then we increase the "conta" variable
                     conta++;
                 }
             }
@@ -100,9 +99,9 @@ public class SostituisciImmaginiPDF {
         reader.close();
         
         for(int i = numeroPag; i >= 1; i--){
-                System.out.println("Pagina esaminata: " + i);
+                System.out.println("Current page: " + i);
                 sostituisci(i);
-                System.out.println("SOSTITUZIONE EFFETTUATA.");
+                System.out.println("REPLACEMENT MADE.");
         }
         
     }
@@ -124,6 +123,7 @@ public class SostituisciImmaginiPDF {
             PdfDictionary res = (PdfDictionary)PdfReader.getPdfObject(pg.get(PdfName.RESOURCES));
             PdfDictionary xobj = (PdfDictionary)PdfReader.getPdfObject(res.get(PdfName.XOBJECT));
             if(xobj != null){
+                //I get all the xobject keys, to trace the PDF images
                 int keys = xobj.getKeys().size();
                 Set<PdfName> setKey = xobj.getKeys();
                 System.out.println(setKey.toString());
@@ -133,10 +133,6 @@ public class SostituisciImmaginiPDF {
                     resImage[i] = name.toString();
                     i++;
                 }
-                    
-                //Esamino l'array resImage
-                //scorro il flusso setKey
-                //cerco l'oggetto di setKey che ha quel nome e lo sostituisco
                 
                 for(int j = 0; j <= resImage.length-1; j++){
                     String s = resImage[j];
@@ -178,5 +174,4 @@ public class SostituisciImmaginiPDF {
             file.delete();
         }
     }
-    
 }
