@@ -52,7 +52,7 @@ public class ReplacingPDFImage {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Replacing all images in PDF files with a redImage image
+        //Replacing all images in PDF files with a red image
         try {
             int numImages = countsPDFimages();
             System.out.println("The PDF has " + numImages + " images!");
@@ -62,7 +62,7 @@ public class ReplacingPDFImage {
                 System.out.println("The PDF doesn't contains images!");
             }else{
                 //The PDF file contains images, then we replace the PDF's images
-                //with a redImage image
+                //with a red image
                 replaceImages();
             }
         } catch (IOException | DocumentException ex) {
@@ -110,7 +110,7 @@ public class ReplacingPDFImage {
         try {
             String supportPDF;
             if(pag == 1){
-                //ultima iterazione
+                //last iteration
                 supportPDF = output;
             }else{
                 supportPDF = pathTemp + "out_" + numPdf + ".pdf";
