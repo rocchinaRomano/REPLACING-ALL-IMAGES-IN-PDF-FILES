@@ -1,6 +1,6 @@
 /*
- *   Here is the code to replace images in PDF, in Java. 
- *   It will replace all the images in pdf with a redImage image. 
+ *   Here is the code to replace all images in PDF files with a red image,
+ *   using the iText library for Java.
  *
  *  This code is property of Rocchina Romano.
  *
