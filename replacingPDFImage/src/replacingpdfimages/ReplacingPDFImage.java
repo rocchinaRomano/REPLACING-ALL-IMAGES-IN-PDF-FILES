@@ -59,7 +59,7 @@ public class ReplacingPDFImage {
             
             if(numImages == 0){
                 //The PDF file hasn't images
-                System.out.println("Il PDF non contiene immagini!");
+                System.out.println("The PDF doesn't contains images!");
             }else{
                 //The PDF file contains images, then we replace the PDF's images
                 //with a redImage image
