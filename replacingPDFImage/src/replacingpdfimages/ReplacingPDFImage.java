@@ -55,7 +55,7 @@ public class ReplacingPDFImage {
         //Replacing all images in PDF files with a redImage image
         try {
             int numImages = countsPDFimages();
-            System.out.println("Il PDF ha " + numImages + " immagini!");
+            System.out.println("The PDF has " + numImages + " images!");
             
             if(numImages == 0){
                 //The PDF file hasn't images
