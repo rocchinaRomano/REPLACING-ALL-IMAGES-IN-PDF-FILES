@@ -1,14 +1,14 @@
 /*
  *   Here is the code to replace images in PDF, in Java. 
- *   It will replace all the images in pdf with a red image. 
+ *   It will replace all the images in pdf with a redImage image. 
  *
  *  This code is property of Rocchina Romano.
  *
  *  Copyright Rocchina Romano 2020
  *
- *  class SostituisciImmaginiPDF (main class)
+ *  class ReplacingPDFImage (main class)
  */
-package sostituisciimmaginipdf;
+package replacingpdfimages;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
@@ -29,22 +29,22 @@ import java.util.Set;
  *
  * @author Rocchina
  */
-public class SostituisciImmaginiPDF {
+public class ReplacingPDFImage {
 
     //red image's path:
-    private static final String red = "./src/sostituisciimmaginipdf/red.jpg";
+    private static final String redImage = "./src/replacingpdfimages/red.jpg";
     
     //Input PDF's path:
-    private static final String input = "./src/sostituisciimmaginipdf/input.pdf";
+    private static final String input = "./src/replacingpdfimages/input.pdf";
    
     //Output PDF's path
-    private static final String output = "./src/sostituisciimmaginipdf/output.pdf";
+    private static final String output = "./src/replacingpdfimages/output.pdf";
     
     //Temporary files's path
-    private static final String pathTemp = "./src/sostituisciimmaginipdf/temp/";
+    private static final String pathTemp = "./src/replacingpdfimages/temp/";
     
     //Support pdf file
-    private static String appoggio = input;
+    private static String supportPDFfile = input;
     
     private static int numPdf = 1;
     
@@ -52,71 +52,71 @@ public class SostituisciImmaginiPDF {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Replacing all images in PDF files with a red image
+        //Replacing all images in PDF files with a redImage image
         try {
-            int numImmagini = contaImmaginiPDF();
-            System.out.println("Il PDF ha " + numImmagini + " immagini!");
+            int numImages = countsPDFimages();
+            System.out.println("Il PDF ha " + numImages + " immagini!");
             
-            if(numImmagini == 0){
+            if(numImages == 0){
                 //The PDF file hasn't images
                 System.out.println("Il PDF non contiene immagini!");
             }else{
                 //The PDF file contains images, then we replace the PDF's images
-                //with a red image
-                sostituisciImmagini();
+                //with a redImage image
+                replaceImages();
             }
         } catch (IOException | DocumentException ex) {
             System.err.println(ex.getMessage());
         }
         //At the end, we empty the temporary files folder.
-        svuotaCartella(pathTemp);
+        emptyFolder(pathTemp);
     }
 
-    private static int contaImmaginiPDF() throws IOException {
+    private static int countsPDFimages() throws IOException {
         //Check if the PDF contains images
         PdfReader reader = new PdfReader(input);
         System.out.println("The PDF has " + reader.getNumberOfPages() 
                 + " pages.");
-        int conta = 0;
+        int count = 0;
         for (int i = 1; i <= reader.getXrefSize(); i++) {
             PdfObject obj = reader.getPdfObject(i);
             if(obj != null && obj.isStream()){
                 PRStream stream = (PRStream)obj;
                 PdfObject type = stream.get(PdfName.SUBTYPE);
                 if(type != null && type.toString().equals(PdfName.IMAGE.toString())){
-                    //It is an image, then we increase the "conta" variable
-                    conta++;
+                    //It is an image, then we increase the "count" variable
+                    count++;
                 }
             }
         }
         reader.close();
-        return conta;
+        return count;
     }
 
-    private static void sostituisciImmagini() throws IOException, DocumentException {
+    private static void replaceImages() throws IOException, DocumentException {
         PdfReader reader = new PdfReader(input);
-        int numeroPag = reader.getNumberOfPages();
+        int numPag = reader.getNumberOfPages();
         reader.close();
         
-        for(int i = numeroPag; i >= 1; i--){
+        for(int i = numPag; i >= 1; i--){
                 System.out.println("Current page: " + i);
-                sostituisci(i);
+                replace(i);
                 System.out.println("REPLACEMENT MADE.");
         }
         
     }
 
-   private static void sostituisci(int pag) {
+   private static void replace(int pag) {
         try {
-            String pdfAppoggio;
+            String supportPDF;
             if(pag == 1){
                 //ultima iterazione
-                pdfAppoggio = output;
+                supportPDF = output;
             }else{
-                pdfAppoggio = pathTemp + "out_" + numPdf + ".pdf";
+                supportPDF = pathTemp + "out_" + numPdf + ".pdf";
             }
-            PdfReader reader = new PdfReader(appoggio);
-            PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(pdfAppoggio));
+            PdfReader reader = new PdfReader(supportPDFfile);
+            PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(supportPDF));
             PdfWriter writer = stamper.getWriter();
             writer.setCompressionLevel(0);
             PdfDictionary pg = reader.getPageN(pag);
@@ -145,7 +145,7 @@ public class SostituisciImmaginiPDF {
                                 PdfName type = (PdfName)PdfReader.getPdfObject(tg.get(PdfName.SUBTYPE));
                                 if(PdfName.IMAGE.equals(type)){
                                     PdfReader.killIndirect(obj);
-                                    Image img = Image.getInstance(red);
+                                    Image img = Image.getInstance(redImage);
                                     Image imageMask = img.getImageMask();
                                     if(imageMask != null){
                                         writer.addDirectImageSimple(imageMask);
@@ -160,14 +160,14 @@ public class SostituisciImmaginiPDF {
             }
             stamper.close();
             reader.close();
-            appoggio = pdfAppoggio;
+            supportPDFfile = supportPDF;
             numPdf++;
         } catch (IOException | DocumentException ex) {
             System.err.println(ex.getMessage());
         }
     }
 
-    private static void svuotaCartella(String pathTemp) {
+    private static void emptyFolder(String pathTemp) {
         File directory = new File(pathTemp);
         File[] files = directory.listFiles();
         for(File file : files){
